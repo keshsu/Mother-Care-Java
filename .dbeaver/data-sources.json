@@ -1,0 +1,30 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql5-16f455aa178-73dd282d9f2521f3": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - mothercare",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "mothercare",
+				"url": "jdbc:mysql://localhost:3306/mothercare",
+				"type": "dev",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}

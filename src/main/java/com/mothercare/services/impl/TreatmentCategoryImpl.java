@@ -1,0 +1,62 @@
+package com.mothercare.services.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.mothercare.dto.TblTreatmentCategoryDto;
+import com.mothercare.entities.TblTreatmentCategory;
+import com.mothercare.repository.TreatmentCategoryRepository;
+import com.mothercare.services.TreatmentCategoryServices;
+
+@Service
+public class TreatmentCategoryImpl implements TreatmentCategoryServices{
+	
+	TreatmentCategoryRepository treatCatRep;
+
+	@Override
+	public List<TblTreatmentCategoryDto> getAlltreatmentCats() {
+		List<TblTreatmentCategory> tblCat = treatCatRep.findAll();
+		
+		List<TblTreatmentCategoryDto> tblCatDtoList = new ArrayList<>();
+		
+		for(TblTreatmentCategory t: tblCat) {
+			
+			TblTreatmentCategoryDto treatDto = TblTreatmentCategoryDto.builder()
+			.id(t.getId())
+			.name(t.getName()).build();
+			
+			tblCatDtoList.add(treatDto);
+		}
+		return tblCatDtoList;
+	}
+
+	@Override
+	public TblTreatmentCategoryDto savetreatmentCat(TblTreatmentCategoryDto treatmentCats) {
+		TblTreatmentCategory treatEntity= TblTreatmentCategory.builder()
+				.name(treatmentCats.getName())
+				.status(treatmentCats.getStatus()).build();
+		
+		treatEntity= treatCatRep.save(treatEntity);
+		treatmentCats.setId(treatmentCats.getId());
+		
+		return treatmentCats;
+	}
+
+	@Override
+	public TblTreatmentCategoryDto gettreatmentCatById(Integer id) {
+		TblTreatmentCategory treatCat = treatCatRep.findById(id).get();
+		return TblTreatmentCategoryDto.builder()
+				.id(treatCat.getId())
+				.name(treatCat.getName())
+				.status(treatCat.getStatus()).build();
+	}
+
+	@Override
+	public void deltreatmentCat(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
