@@ -13,4 +13,6 @@ public interface CheckUpAssignsServices {
 	public void delCheckupAssigns(Integer id);
 
 	public TblCheckupAssignsDto saveCheckupAssigns(TblCheckupAssignsDto checkupAssigns);
+
+	public TblCheckupAssignsDto updateCheckupAssigns(TblCheckupAssignsDto checkupAssigns);
 }

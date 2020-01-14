@@ -14,4 +14,6 @@ public interface DepartmentsServices {
 
 	public void delDepartments(Integer id);
 
+	public TblDepartmentsDto updateDepartments(TblDepartmentsDto getDepartments);
+
 }

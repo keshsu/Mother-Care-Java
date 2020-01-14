@@ -36,6 +36,11 @@ public class CheckUpAssignsController {
 		return checkupAssignsSer.saveCheckupAssigns(CheckupAssigns);
 	}
 	
+	@PostMapping("/update")
+	public TblCheckupAssignsDto updateCheckupAssigns(@RequestBody TblCheckupAssignsDto CheckupAssigns) {
+		return checkupAssignsSer.updateCheckupAssigns(CheckupAssigns);
+	}
+	
 	@GetMapping("/delete/{id}")
 	public void delCheckupAssigns(@PathVariable Integer id) {
 		checkupAssignsSer.delCheckupAssigns(id);

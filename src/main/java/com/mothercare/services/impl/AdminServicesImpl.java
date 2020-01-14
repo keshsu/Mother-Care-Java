@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,8 @@ public class AdminServicesImpl implements AdminServices{
 		for(TblAdmins u: users) {
 			TblAdminsDto userDto = TblAdminsDto.builder()
 					.id(u.getId())
-					.username(u.getUsername()).build();
+					.username(u.getUsername())
+					.status(u.getStatus()).build();
 			
 			usersDtoList.add(userDto);
 		}
@@ -37,14 +39,16 @@ public class AdminServicesImpl implements AdminServices{
 		TblAdmins users = userRepo.findById(id).get();
 		return TblAdminsDto.builder()
 				.id(users.getId())
-				.username(users.getUsername()).build();
+				.username(users.getUsername())
+				.status(users.getStatus()).build();
 	}
 
 	@Override
 	public TblAdminsDto saveUser(TblAdminsDto user) {
 		TblAdmins adminEntity = TblAdmins.builder()
 				.username(user.getUsername())
-				.password(user.getPassword()).build();
+				.password(user.getPassword())
+				.status(user.getStatus()).build();
 		adminEntity= userRepo.save(adminEntity);
 		user.setId(adminEntity.getId());
 		
@@ -54,6 +58,20 @@ public class AdminServicesImpl implements AdminServices{
 	@Override
 	public void delUser(Integer id) {
 		userRepo.deleteById(id);
+	}
+
+	@Override
+	public TblAdminsDto updateUser(TblAdminsDto user) {
+		Optional<TblAdmins> us = userRepo.findById(user.getId());
+		if(us.isPresent()) {
+			TblAdmins adminEntity = us.get();
+			adminEntity.setUsername(user.getUsername());
+			adminEntity.setStatus(user.getStatus());
+			
+			adminEntity= userRepo.save(adminEntity);
+			
+		}
+		return user;
 	}
 }
 	

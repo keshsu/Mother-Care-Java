@@ -34,6 +34,11 @@ public class DepartmentsController {
 		return departmentSer.saveDepartments(getDepartments);
 	}
 	
+	@PostMapping("/update")
+	public TblDepartmentsDto updateDepartments(@RequestBody TblDepartmentsDto getDepartments) {
+		return departmentSer.updateDepartments(getDepartments);
+	}
+	
 	@GetMapping("/delete/{id}")
 	public void delgetDepartments(@PathVariable Integer id) {
 		departmentSer.delDepartments(id);

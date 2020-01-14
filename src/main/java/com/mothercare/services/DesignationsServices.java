@@ -12,4 +12,6 @@ public interface DesignationsServices {
 	public TblDesignationsDto saveDesignation(TblDesignationsDto designation);
 	
 	public void delDesignation(Integer id);
+
+	public TblDesignationsDto supdateDesignation(TblDesignationsDto designation);
 }

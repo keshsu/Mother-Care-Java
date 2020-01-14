@@ -26,6 +26,11 @@ public class DesignationsController {
 	public TblDesignationsDto saveDesignation(@RequestBody TblDesignationsDto Designation) {
 		return desigSer.saveDesignation(Designation);
 	}
+	
+	@PostMapping("/update")
+	public TblDesignationsDto updateDesignation(@RequestBody TblDesignationsDto Designation) {
+		return desigSer.supdateDesignation(Designation);
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblDesignationsDto> getDesignations(){

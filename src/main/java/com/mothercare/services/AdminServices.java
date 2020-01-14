@@ -13,5 +13,8 @@ public interface AdminServices {
 	public TblAdminsDto saveUser(TblAdminsDto user);
 	
 	public void delUser(Integer id);
+
+	public TblAdminsDto updateUser(TblAdminsDto user);
+	
 }	
 	

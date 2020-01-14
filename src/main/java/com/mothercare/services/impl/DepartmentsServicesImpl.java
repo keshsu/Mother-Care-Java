@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,5 +63,22 @@ public class DepartmentsServicesImpl implements DepartmentsServices{
 	@Override
 	public void delDepartments(Integer id) {
 		departmentRepo.deleteById(id);
+	}
+
+	@Override
+	public TblDepartmentsDto updateDepartments(TblDepartmentsDto getDepartments) {
+		Optional<TblDepartments> deps = departmentRepo.findById(getDepartments.getId());
+		
+		if(deps.isPresent()) {
+			TblDepartments depEntity = TblDepartments.builder()
+					.id(getDepartments.getId())
+					.name(getDepartments.getName())
+					.status(getDepartments.getStatus())
+					.build();
+			
+			depEntity= departmentRepo.save(depEntity);
+			
+		}
+		return getDepartments;
 	}
 }

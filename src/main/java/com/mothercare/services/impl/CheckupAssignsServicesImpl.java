@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -109,4 +110,30 @@ public class CheckupAssignsServicesImpl implements CheckUpAssignsServices{
 		return checkupAssigns;
 	}
 
+	@Override
+	public TblCheckupAssignsDto updateCheckupAssigns(TblCheckupAssignsDto checkupAssigns) {
+		
+		Optional<TblCheckupAssigns> ch = checkupAssignsRep.findById(checkupAssigns.getId());
+		
+		if(ch.isPresent()) {
+			TblDoctors doc = TblDoctors.builder()
+					.id(checkupAssigns.getTblDoctors().getId()).build();
+			
+			TblPatients pat = TblPatients.builder()
+					.id(checkupAssigns.getTblPatients().getId()).build();
+			
+			TblTreatmentCategory tCat = TblTreatmentCategory.builder()
+					.id(checkupAssigns.getTblTreatmentCategory().getId()).build();
+			
+			TblCheckupAssigns checkupEntity = TblCheckupAssigns.builder()
+					.id(checkupAssigns.getId())
+					.tblDoctors(doc)
+					.tblPatients(pat)
+					.tblTreatmentCategory(tCat)
+					.build();
+			checkupEntity= checkupAssignsRep.save(checkupEntity);
+		}
+		
+		return checkupAssigns;
+	}
 }

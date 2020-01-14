@@ -26,6 +26,11 @@ public class AdminsController {
 	public TblAdminsDto saveUser(@RequestBody TblAdminsDto user) {
 		return adminSer.saveUser(user);
 	}
+	
+	@PostMapping("/update")
+	public TblAdminsDto updateUser(@RequestBody TblAdminsDto user) {
+		return adminSer.updateUser(user);
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblAdminsDto> getUsers(){
