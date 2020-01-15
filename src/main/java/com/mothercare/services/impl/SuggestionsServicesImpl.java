@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -165,6 +166,32 @@ public class SuggestionsServicesImpl implements SuggestionsServices{
 	@Override
 	public void delSuggestion(Integer id) {
 		sugRep.deleteById(id);
+	}
+
+	@Override
+	public TblSuggestionsDto updatesuggestion(TblSuggestionsDto suggestions) {
+		Optional<TblSuggestions> sugs = sugRep.findById(suggestions.getId());
+		if(sugs.isPresent()) {
+			TblCheckupAssigns checkup = TblCheckupAssigns.builder()
+					.id(suggestions.getTblCheckupAssigns().getId()).build();
+			
+			TblPharmachies pharma= TblPharmachies.builder()
+					.id(suggestions.getTblPharmachies().getId()).build();
+			
+			TblPrescription pres = TblPrescription.builder()
+					.id(suggestions.getTblPrescription().getId()).build();
+					
+			TblSuggestions suggestionEntity = TblSuggestions.builder()
+					.id(suggestions.getId())
+					.tblCheckupAssigns(checkup)
+					.tblPharmachies(pharma)
+					.tblPrescription(pres)
+					.build();
+			suggestionEntity= sugRep.save(suggestionEntity);
+			suggestions.setId(suggestionEntity.getId());
+			
+		}
+		return suggestions;
 	}
 
 }

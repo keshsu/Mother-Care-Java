@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,6 +99,33 @@ public class StaffsDesignationsServicesImpl implements StaffsDesignationsService
 	@Override
 	public void delStaffsDesignation(Integer id) {
 		stafDRepo.deleteById(id);
+	}
+
+	@Override
+	public TblStaffsDesignationDto updateStaff(TblStaffsDesignationDto staffsdesgn) {
+		Optional<TblStaffsDesignation> staffDe = stafDRepo.findById(staffsdesgn.getId());
+		if(staffDe.isPresent()) {
+			TblStaffs stf = TblStaffs.builder()
+					.id(staffsdesgn.getTblStaffs().getId())
+					.firstname(staffsdesgn.getTblStaffs().getFirstname())
+					.lastname(staffsdesgn.getTblStaffs().getLastname())
+					.build();
+			
+			TblDesignations dsg = TblDesignations.builder()
+					.id(staffsdesgn.getTblDesignations().getId())
+					.name(staffsdesgn.getTblDesignations().getName())
+					.build();
+			
+			TblStaffsDesignation staffDegEntity= TblStaffsDesignation.builder()
+					.id(staffsdesgn.getId())
+					.tblStaffs(stf)
+					.tblDesignations(dsg).build();
+			
+			staffDegEntity= stafDRepo.save(staffDegEntity);
+			staffsdesgn.setId(staffsdesgn.getId());
+			
+		}
+		return staffsdesgn;
 	}
 
 }

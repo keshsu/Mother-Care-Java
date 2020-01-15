@@ -22,8 +22,13 @@ public class StaffsController {
 	StaffsServices staffSer;
 	
 	@PostMapping("/save")
-	public TblStaffsDto saveStaffs(@RequestBody TblStaffsDto patients) {
-		return staffSer.saveStaff(patients);
+	public TblStaffsDto saveStaffs(@RequestBody TblStaffsDto staffs) {
+		return staffSer.saveStaff(staffs);
+	}
+
+	@PostMapping("/update")
+	public TblStaffsDto updateStaffs(@RequestBody TblStaffsDto staffs) {
+		return staffSer.updateStaff(staffs);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

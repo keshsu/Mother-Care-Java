@@ -26,6 +26,11 @@ public class TreatmentCategoryController {
 		return treatmentCatSer.savetreatmentCat(treatmentCats);
 	}
 
+	@PostMapping("/update")
+	public TblTreatmentCategoryDto updatetreatmentCats(@RequestBody TblTreatmentCategoryDto treatmentCats) {
+		return treatmentCatSer.updatetreatmentCat(treatmentCats);
+	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblTreatmentCategoryDto> getPatients(){
 		return treatmentCatSer.getAlltreatmentCats();

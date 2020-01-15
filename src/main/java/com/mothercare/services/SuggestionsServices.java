@@ -14,4 +14,6 @@ public interface SuggestionsServices {
 
 	void delSuggestion(Integer id);
 
+	public TblSuggestionsDto updatesuggestion(TblSuggestionsDto suggestions);
+
 }

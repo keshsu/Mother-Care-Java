@@ -64,9 +64,10 @@ public class AdminServicesImpl implements AdminServices{
 	public TblAdminsDto updateUser(TblAdminsDto user) {
 		Optional<TblAdmins> us = userRepo.findById(user.getId());
 		if(us.isPresent()) {
-			TblAdmins adminEntity = us.get();
-			adminEntity.setUsername(user.getUsername());
-			adminEntity.setStatus(user.getStatus());
+			TblAdmins adminEntity = TblAdmins.builder()
+					.username(user.getUsername())
+					.password(user.getPassword())
+					.status(user.getStatus()).build();
 			
 			adminEntity= userRepo.save(adminEntity);
 			

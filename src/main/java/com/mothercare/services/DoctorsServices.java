@@ -13,4 +13,6 @@ public interface DoctorsServices {
 	public TblDoctorsDto saveDoctor(TblDoctorsDto Doctor);
 	
 	public void delDoctor(Integer id);
+
+	public TblDoctorsDto updateDoctor(TblDoctorsDto user);
 }

@@ -13,5 +13,7 @@ public interface PatientsStatusServices {
 	public TblPatientsStatusDto getPatientStatusById(Integer id);
 
 	public void delPatientStatus(Integer id);
+
+	public TblPatientsStatusDto updatePatientStatus(TblPatientsStatusDto pats);
 	
 }	

@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,21 @@ public class SpecialitiesServicesImpl implements SpecialitiesServices{
 	@Override
 	public void delSpeciality(Integer id) {
 		speRep.deleteById(id);
+	}
+
+	@Override
+	public TblSpecialityDto updateSpecialitie(TblSpecialityDto specialities) {
+		Optional<TblSpeciality> spec = speRep.findById(specialities.getId());
+		if(spec.isPresent()) {
+			TblSpeciality depEntity = TblSpeciality.builder()
+					.id(specialities.getId())
+					.name(specialities.getName())
+					.status(specialities.getStatus())
+					.build();
+			
+			depEntity= speRep.save(depEntity);
+		}
+		return specialities;	
 	}
 
 }

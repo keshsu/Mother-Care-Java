@@ -25,6 +25,11 @@ public class SpecialityController {
 	public TblSpecialityDto saveSpecialities(@RequestBody TblSpecialityDto Specialities) {
 		return speSer.saveSpecialitie(Specialities);
 	}
+	
+	@PostMapping("/update")
+	public TblSpecialityDto updateSpecialities(@RequestBody TblSpecialityDto Specialities) {
+		return speSer.updateSpecialitie(Specialities);
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblSpecialityDto> getSpecialities(){

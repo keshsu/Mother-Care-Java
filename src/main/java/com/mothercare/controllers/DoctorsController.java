@@ -26,6 +26,11 @@ public class DoctorsController {
 		return docSer.saveDoctor(user);
 	}
 
+	@PostMapping("/update")
+	public TblDoctorsDto updateDoctor(@RequestBody TblDoctorsDto user) {
+		return docSer.updateDoctor(user);
+	}
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblDoctorsDto> getUsers(){
 		return docSer.getAllDoctors();

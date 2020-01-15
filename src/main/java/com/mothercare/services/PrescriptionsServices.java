@@ -14,4 +14,6 @@ public interface PrescriptionsServices {
 
 	public void delPrescription(Integer id);
 
+	public TblPrescriptionDto updatePrescription(TblPrescriptionDto prescription);
+
 }

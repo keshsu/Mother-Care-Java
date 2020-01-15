@@ -21,10 +21,14 @@ public class PharmachiesController {
 	@Autowired
 	PharmaciesServices pharSer;
 	
-	
 	@PostMapping("/save")
-	public TblPharmachiesDto savePharmacies(@RequestBody TblPharmachiesDto patients) {
-		return pharSer.savePharmacy(patients);
+	public TblPharmachiesDto savePharmacies(@RequestBody TblPharmachiesDto pharmas) {
+		return pharSer.savePharmacy(pharmas);
+	}
+
+	@PostMapping("/update")
+	public TblPharmachiesDto updatePharmacies(@RequestBody TblPharmachiesDto pharmas) {
+		return pharSer.updatePharmacy(pharmas);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

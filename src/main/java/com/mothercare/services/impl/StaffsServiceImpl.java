@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,6 +74,24 @@ public class StaffsServiceImpl implements StaffsServices{
 			staffsDtoList.add(staffDto);
 		}
 		return staffsDtoList;
+	}
+
+	@Override
+	public TblStaffsDto updateStaff(TblStaffsDto staffs) {
+		Optional<TblStaffs> staff = staffRepo.findById(staffs.getId());
+		if(staff.isPresent()) {
+			TblStaffs staffEntity= TblStaffs.builder()
+					.firstname(staffs.getFirstname())
+					.lastname(staffs.getLastname())
+					.username(staffs.getUsername())
+					.email(staffs.getEmail())
+					.contact(staffs.getContact())
+					.address(staffs.getAddress())
+					.status(staffs.getStatus()).build();
+			
+			staffEntity= staffRepo.save(staffEntity);
+		}
+		return staffs;
 	}
 
 }

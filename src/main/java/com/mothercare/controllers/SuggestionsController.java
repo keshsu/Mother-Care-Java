@@ -25,6 +25,11 @@ public class SuggestionsController {
 		return suggestionSer.savesuggestion(suggestions);
 	}
 
+	@PostMapping("/update")
+	public TblSuggestionsDto updateSuggestions(@RequestBody TblSuggestionsDto suggestions) {
+		return suggestionSer.updatesuggestion(suggestions);
+	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblSuggestionsDto> getsuggestions(){
 		return suggestionSer.getAllsuggestions();

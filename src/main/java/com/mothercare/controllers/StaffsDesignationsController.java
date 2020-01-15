@@ -25,6 +25,11 @@ public class StaffsDesignationsController {
 	public TblStaffsDesignationDto saveStaffs(@RequestBody TblStaffsDesignationDto staffsdesgn) {
 		return staffDSer.saveStaff(staffsdesgn);
 	}
+	
+	@PostMapping("/update")
+	public TblStaffsDesignationDto updateStaffs(@RequestBody TblStaffsDesignationDto staffsdesgn) {
+		return staffDSer.updateStaff(staffsdesgn);
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblStaffsDesignationDto> getStaffsDesgts(){

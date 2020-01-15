@@ -14,4 +14,6 @@ public interface SpecialitiesServices {
 
 	public void delSpeciality(Integer id);
 
+	public TblSpecialityDto updateSpecialitie(TblSpecialityDto specialities);
+
 }

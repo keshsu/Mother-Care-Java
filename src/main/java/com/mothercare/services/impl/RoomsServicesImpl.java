@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,25 @@ public class RoomsServicesImpl implements RoomsServices{
 	@Override
 	public void delRoom(Integer id) {
 		roomRepo.deleteById(id);
+	}
+
+	@Override
+	public TblRoomsDto UpdateRoom(TblRoomsDto rooms) {	
+		Optional<TblRooms> room = roomRepo.findById(rooms.getId());
+		
+		if(room.isPresent()) {			
+			TblDepartments dep = TblDepartments.builder()
+					.id(rooms.getTblDepartments().getId()).build();
+			
+			TblRooms roomEntity = TblRooms.builder()
+					.id(rooms.getId())
+					.name(rooms.getName())
+					.tblDepartments(dep)
+					.status(rooms.getStatus()).build();
+			
+			roomEntity= roomRepo.save(roomEntity);
+		}
+		return rooms;
 	}
 
 }

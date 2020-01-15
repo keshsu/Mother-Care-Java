@@ -25,6 +25,11 @@ public class RoomsController{
 	public TblRoomsDto saveRooms(@RequestBody TblRoomsDto rooms) {
 		return roomServices.saveRoom(rooms);
 	}
+	
+	@PostMapping("/update")
+	public TblRoomsDto updateRooms(@RequestBody TblRoomsDto rooms) {
+		return roomServices.UpdateRoom(rooms);
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblRoomsDto> getRooms(){

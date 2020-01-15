@@ -16,7 +16,7 @@ import com.mothercare.services.PrescriptionsServices;
 
 @RestController
 @RequestMapping("/prescription")
-public class PerscriptionsController {
+public class PrescriptionsController {
 	
 	@Autowired 
 	PrescriptionsServices prsSer;
@@ -24,6 +24,11 @@ public class PerscriptionsController {
 	@PostMapping("/save")
 	public TblPrescriptionDto savePrescriptions(@RequestBody TblPrescriptionDto prescription) {
 		return prsSer.savePrescription(prescription);
+	}
+
+	@PostMapping("/update")
+	public TblPrescriptionDto updatePrescriptions(@RequestBody TblPrescriptionDto prescription) {
+		return prsSer.updatePrescription(prescription);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

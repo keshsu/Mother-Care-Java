@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,4 +76,24 @@ public class PharmaciesServicesImpl implements PharmaciesServices{
 				.status(deps.getStatus())
 				.build();
 		}
+
+	@Override
+	public TblPharmachiesDto updatePharmacy(TblPharmachiesDto pharmas) {
+		Optional<TblPharmachies> pharma = pharmaciesRepo.findById(pharmas.getId());
+		if(pharma.isPresent()) {
+			TblPharmachies pharmaciesEntity= TblPharmachies.builder()
+					.id(pharmas.getId())
+					.name(pharmas.getName())
+					.email(pharmas.getEmail())
+					.password(pharmas.getPassword())
+					.contact(pharmas.getContact())
+					.address(pharmas.getAddress())
+					.status(pharmas.getStatus())
+					.build();
+			
+			pharmaciesEntity= pharmaciesRepo.save(pharmaciesEntity);
+			
+		}
+		return pharmas;
+	}
 }

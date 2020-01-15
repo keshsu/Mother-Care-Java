@@ -1,7 +1,9 @@
 package com.mothercare.services.impl;
 
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -55,8 +57,22 @@ public class TreatmentCategoryImpl implements TreatmentCategoryServices{
 
 	@Override
 	public void deltreatmentCat(Integer id) {
-		// TODO Auto-generated method stub
-		
+		treatCatRep.deleteById(id);
+	}
+
+	@Override
+	public TblTreatmentCategoryDto updatetreatmentCat(TblTreatmentCategoryDto treatmentCats) {
+		Optional<TblTreatmentCategory> treatCat = treatCatRep.findById(treatmentCats.getId());
+		if(treatCat.isPresent()) {
+			TblTreatmentCategory treatEntity= TblTreatmentCategory.builder()
+					.name(treatmentCats.getName())
+					.status(treatmentCats.getStatus()).build();
+			
+			treatEntity= treatCatRep.save(treatEntity);
+			treatmentCats.setId(treatmentCats.getId());
+			
+		}
+		return treatmentCats;
 	}
 
 }

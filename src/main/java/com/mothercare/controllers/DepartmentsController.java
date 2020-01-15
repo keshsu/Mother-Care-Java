@@ -24,6 +24,7 @@ public class DepartmentsController {
 	public List<TblDepartmentsDto> getDepartments(){
 		return departmentSer.getAllDepartments();	
 	}
+	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public TblDepartmentsDto getCheckupById(@PathVariable Integer id){
 		return departmentSer.getDepartmentById(id);

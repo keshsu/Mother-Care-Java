@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +83,27 @@ public class PatientsServicesImpl implements PatientsServices{
 				.pcontact(deps.getPcontact())
 				.address(deps.getAddress())	
 				.build();
+	}
+
+	@Override
+	public TblPatientsDto updatePatient(TblPatientsDto patients) {
+		Optional<TblPatients> pat = patRepo.findById(patients.getId());
+		if(pat.isPresent()) {
+			TblPatients depEntity = TblPatients.builder()
+					.id(patients.getId())
+					.firstname(patients.getFirstname())
+					.lastname(patients.getLastname())
+					.pfirstname(patients.getPfirstname())
+					.plastname(patients.getPlastname())
+					.email(patients.getEmail())
+					.password(patients.getPassword())
+					.contact(patients.getContact())
+					.pcontact(patients.getPcontact())
+					.address(patients.getAddress())	
+					.build();
+			
+			depEntity= patRepo.save(depEntity);			
+		}
+		return patients;
 	}
 }

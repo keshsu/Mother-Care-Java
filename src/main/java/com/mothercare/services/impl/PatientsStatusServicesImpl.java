@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,25 @@ public class PatientsStatusServicesImpl implements PatientsStatusServices{
 	@Override
 	public void delPatientStatus(Integer id) {
 		patRepo.deleteById(id);
+	}
+
+	@Override
+	public TblPatientsStatusDto updatePatientStatus(TblPatientsStatusDto pats) {
+		Optional<TblPatientStatus> patstatus = patRepo.findById(pats.getId());
+		if(patstatus.isPresent()) {
+			TblPatients patients = TblPatients.builder()
+					.id(pats.getTblPatients().getId()).build();
+			
+			TblPatientStatus patStEntity = TblPatientStatus.builder()
+					.id(pats.getId())
+					.tblPatients(patients)
+					.featured(pats.getFeatured())
+					.status(pats.getStatus()).build();
+			
+			patStEntity= patRepo.save(patStEntity);
+			
+		}
+		return pats;
 	}
 
 }

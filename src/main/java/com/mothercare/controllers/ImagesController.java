@@ -23,6 +23,11 @@ public class ImagesController {
 	public TblImagesDto saveImage(@RequestBody TblImagesDto Image) {
 		return imgSer.saveimages(Image);
 	}
+	
+	@PostMapping("/update")
+	public TblImagesDto updateImage(@RequestBody TblImagesDto Image) {
+		return imgSer.updateimages(Image);
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblImagesDto> getImages(){

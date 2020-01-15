@@ -1,7 +1,9 @@
+
 package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +62,21 @@ public class PrescriptionsServicesImpl implements PrescriptionsServices {
 	@Override
 	public void delPrescription(Integer id) {
 		preRepo.deleteById(id);
+	}
+
+	@Override
+	public TblPrescriptionDto updatePrescription(TblPrescriptionDto prescription) {
+		Optional<TblPrescription> presc = preRepo.findById(prescription.getId());
+		if(presc.isPresent()) {
+			TblPrescription prescriptionEntity = TblPrescription.builder()
+					.id(prescription.getId())
+					.name(prescription.getName())
+					.description(prescription.getDescription())
+					.comments(prescription.getComments()).build();
+			
+			prescriptionEntity= preRepo.save(prescriptionEntity);
+		}
+		return prescription;
 	}
 
 }

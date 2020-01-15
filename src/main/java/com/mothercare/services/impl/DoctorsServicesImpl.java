@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,6 +96,31 @@ public class DoctorsServicesImpl implements DoctorsServices {
 	@Override
 	public void delDoctor(Integer id) {
 		docRepo.deleteById(id);
+	}
+
+	@Override
+	public TblDoctorsDto updateDoctor(TblDoctorsDto user) {
+		Optional<TblDoctors> doc = docRepo.findById(user.getId());
+		
+		if(doc.isPresent()) {
+			TblSpeciality splt = TblSpeciality.builder()
+					.id(user.getTblSpeciality().getId()).build();
+			
+			TblDoctors depEntity = TblDoctors.builder()
+					.id(user.getId())
+					.firstname(user.getFirstname())
+					.lastname(user.getLastname())
+					.email(user.getEmail())
+					.password(user.getPassword())
+					.contact(user.getContact())
+					.tblSpeciality(splt)
+					.qualification(user.getQualification())
+					.address(user.getAddress())
+					.build();
+			
+			depEntity= docRepo.save(depEntity);
+		}
+		return user;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,23 @@ public class DesignationServicesImpl implements DesignationsServices{
 	@Override
 	public void delDesignation(Integer id) {
 		designRepo.deleteById(id);
+	}
+
+	@Override
+	public TblDesignationsDto updateDesignation(TblDesignationsDto designation) {
+		Optional<TblDesignations> desgs = designRepo.findById(designation.getId());
+		
+		if(desgs.isPresent()) {
+			TblDesignations depEntity = TblDesignations.builder()
+					.id(designation.getId())
+					.name(designation.getName())
+					.status(designation.getStatus())
+					.build();
+			
+			depEntity= designRepo.save(depEntity);
+			
+		}
+		return designation;
 	}
 
 }

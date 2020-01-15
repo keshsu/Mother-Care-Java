@@ -14,4 +14,6 @@ public interface StaffsDesignationsServices {
 
 	public List<TblStaffsDesignationDto> getAllStaffsDesgts();
 
+	public TblStaffsDesignationDto updateStaff(TblStaffsDesignationDto staffsdesgn);
+
 }

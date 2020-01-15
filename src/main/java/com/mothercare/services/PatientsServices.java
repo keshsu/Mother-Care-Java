@@ -14,4 +14,6 @@ public interface PatientsServices {
 
 	public TblPatientsDto getPatientById(Integer id);
 
+	public TblPatientsDto updatePatient(TblPatientsDto patients);
+
 }

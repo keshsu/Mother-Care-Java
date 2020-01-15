@@ -12,4 +12,6 @@ public interface StaffsServices {
 	public TblStaffsDto getstaffById(Integer id);
 
 	public void delStaff(Integer id);
+
+	public TblStaffsDto updateStaff(TblStaffsDto staffs);
 }

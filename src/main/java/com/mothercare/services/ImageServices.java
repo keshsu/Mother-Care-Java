@@ -14,4 +14,6 @@ public interface ImageServices {
 
 	void delimages(Integer id);
 
+	public TblImagesDto updateimages(TblImagesDto image);
+
 }

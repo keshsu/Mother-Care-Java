@@ -29,7 +29,7 @@ public class DesignationsController {
 	
 	@PostMapping("/update")
 	public TblDesignationsDto updateDesignation(@RequestBody TblDesignationsDto Designation) {
-		return desigSer.supdateDesignation(Designation);
+		return desigSer.updateDesignation(Designation);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

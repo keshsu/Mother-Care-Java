@@ -13,7 +13,6 @@ public interface RoomsServices {
 	public TblRoomsDto getRoomById(Integer id);
 
 	public void delRoom(Integer id);
-	
-	
 
+	public TblRoomsDto UpdateRoom(TblRoomsDto rooms);
 }

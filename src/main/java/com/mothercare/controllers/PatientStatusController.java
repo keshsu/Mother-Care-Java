@@ -24,6 +24,11 @@ public class PatientStatusController {
 	public TblPatientsStatusDto savePatientStatus(@RequestBody TblPatientsStatusDto pats) {
 		return patSer.savePatientStatus(pats);
 	}
+	
+	@PostMapping("/update")
+	public TblPatientsStatusDto updatePatientStatus(@RequestBody TblPatientsStatusDto pats) {
+		return patSer.updatePatientStatus(pats);
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<TblPatientsStatusDto> getUsers(){

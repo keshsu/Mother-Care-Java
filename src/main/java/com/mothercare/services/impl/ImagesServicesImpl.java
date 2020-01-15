@@ -2,6 +2,7 @@ package com.mothercare.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,21 @@ public class ImagesServicesImpl implements ImageServices{
 	@Override
 	public void delimages(Integer id) {
 		imageRep.deleteById(id);
+	}
+
+	@Override
+	public TblImagesDto updateimages(TblImagesDto image) {
+
+		Optional<TblImages> img = imageRep.findById(image.getId());
+		if(img.isPresent()) {
+			TblImages depEntity = TblImages.builder()
+					.id(image.getId())
+					.name(image.getName())
+					.build();
+			
+			depEntity= imageRep.save(depEntity);
+		}
+		return image;
 	}
 
 }

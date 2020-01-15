@@ -14,4 +14,6 @@ public interface TreatmentCategoryServices {
 
 	void deltreatmentCat(Integer id);
 
+	public TblTreatmentCategoryDto updatetreatmentCat(TblTreatmentCategoryDto treatmentCats);
+
 }
