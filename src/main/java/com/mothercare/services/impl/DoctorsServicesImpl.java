@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mothercare.dto.TblDoctorsDto;
-import com.mothercare.dto.TblSpecialityDto;
 import com.mothercare.entities.TblDoctors;
 import com.mothercare.entities.TblSpeciality;
 import com.mothercare.repository.DoctorsRepository;
@@ -27,20 +26,14 @@ public class DoctorsServicesImpl implements DoctorsServices {
 		
 		List<TblDoctorsDto> depsDtoList = new ArrayList<>();	
 		
-		for(TblDoctors u: deps) {
-						
-			TblSpecialityDto splt = TblSpecialityDto.builder()
-					.id(u.getTblSpeciality().getId())
-					.name(u.getTblSpeciality().getName())
-					.build();
-			
+		for(TblDoctors u: deps) {			
 			TblDoctorsDto depDto = TblDoctorsDto.builder()
 					.id(u.getId())
 					.firstname(u.getFirstname())
 					.lastname(u.getLastname())
 					.email(u.getEmail())
 					.contact(u.getContact())
-					.tblSpeciality(splt)
+					.tblSpeciality(u.getTblSpeciality().getId())
 					.qualification(u.getQualification())
 					.address(u.getAddress())
 					.build();
@@ -54,18 +47,13 @@ public class DoctorsServicesImpl implements DoctorsServices {
 	public TblDoctorsDto getDoctorById(Integer id) {
 		TblDoctors deps = docRepo.findById(id).get();
 		
-		TblSpecialityDto splt = TblSpecialityDto.builder()
-				.id(deps.getTblSpeciality().getId())
-				.name(deps.getTblSpeciality().getName())
-				.build();
-		
 		return TblDoctorsDto.builder()
 				.id(deps.getId())
 				.firstname(deps.getFirstname())
 				.lastname(deps.getLastname())
 				.email(deps.getEmail())
 				.contact(deps.getContact())
-				.tblSpeciality(splt)
+				.tblSpeciality(deps.getTblSpeciality().getId())
 				.qualification(deps.getQualification())
 				.address(deps.getAddress())
 				.build();
@@ -74,7 +62,7 @@ public class DoctorsServicesImpl implements DoctorsServices {
 	@Override
 	public TblDoctorsDto saveDoctor(TblDoctorsDto DoctorsDto) {
 		TblSpeciality splt = TblSpeciality.builder()
-				.id(DoctorsDto.getTblSpeciality().getId()).build();
+				.id(DoctorsDto.getTblSpeciality()).build();
 		
 		TblDoctors depEntity = TblDoctors.builder()
 				.id(DoctorsDto.getId())
@@ -104,7 +92,7 @@ public class DoctorsServicesImpl implements DoctorsServices {
 		
 		if(doc.isPresent()) {
 			TblSpeciality splt = TblSpeciality.builder()
-					.id(user.getTblSpeciality().getId()).build();
+					.id(user.getTblSpeciality()).build();
 			
 			TblDoctors depEntity = TblDoctors.builder()
 					.id(user.getId())

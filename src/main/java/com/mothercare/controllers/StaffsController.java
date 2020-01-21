@@ -32,7 +32,7 @@ public class StaffsController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<TblStaffsDto> getPatients(){
+	public List<TblStaffsDto> getStaffs(){
 		return staffSer.getAllStaffs();
 	}
 	

@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mothercare.dto.TblPatientsDto;
 import com.mothercare.dto.TblPatientsStatusDto;
 import com.mothercare.entities.TblPatientStatus;
 import com.mothercare.entities.TblPatients;
@@ -23,7 +22,7 @@ public class PatientsStatusServicesImpl implements PatientsStatusServices{
 	@Override
 	public TblPatientsStatusDto savePatientStatus(TblPatientsStatusDto pats) {
 		TblPatients patients = TblPatients.builder()
-				.id(pats.getTblPatients().getId()).build();
+				.id(pats.getTblPatients()).build();
 		
 		TblPatientStatus patStEntity = TblPatientStatus.builder()
 				.id(pats.getId())
@@ -43,13 +42,10 @@ public class PatientsStatusServicesImpl implements PatientsStatusServices{
 		
 		List<TblPatientsStatusDto> patsDtoList = new ArrayList<>();		
 		for(TblPatientStatus u: pats) {
-			TblPatientsDto patients = TblPatientsDto.builder()
-					.id(u.getTblPatients().getId())
-					.firstname(u.getTblPatients().getFirstname())
-					.lastname(u.getTblPatients().getLastname()).build();
+	
 			TblPatientsStatusDto patDto = TblPatientsStatusDto.builder()
 					.id(u.getId())
-					.tblPatients(patients)
+					.tblPatients(u.getTblPatients().getId())
 					.featured(u.getFeatured())
 					.status(u.getStatus()).build();
 			
@@ -62,14 +58,9 @@ public class PatientsStatusServicesImpl implements PatientsStatusServices{
 	public TblPatientsStatusDto getPatientStatusById(Integer id) {
 		TblPatientStatus pats = patRepo.findById(id).get();
 		
-		TblPatientsDto patients = TblPatientsDto.builder()
-				.id(pats.getTblPatients().getId())
-				.firstname(pats.getTblPatients().getFirstname())
-				.lastname(pats.getTblPatients().getLastname()).build();
-		
 		return  TblPatientsStatusDto.builder()
 				.id(pats.getId())
-				.tblPatients(patients)
+				.tblPatients(pats.getTblPatients().getId())
 				.featured(pats.getFeatured())
 				.status(pats.getStatus()).build();
 	}
@@ -84,7 +75,7 @@ public class PatientsStatusServicesImpl implements PatientsStatusServices{
 		Optional<TblPatientStatus> patstatus = patRepo.findById(pats.getId());
 		if(patstatus.isPresent()) {
 			TblPatients patients = TblPatients.builder()
-					.id(pats.getTblPatients().getId()).build();
+					.id(pats.getTblPatients()).build();
 			
 			TblPatientStatus patStEntity = TblPatientStatus.builder()
 					.id(pats.getId())

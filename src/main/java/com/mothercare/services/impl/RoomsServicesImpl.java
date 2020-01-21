@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mothercare.dto.TblDepartmentsDto;
 import com.mothercare.dto.TblRoomsDto;
 import com.mothercare.entities.TblDepartments;
 import com.mothercare.entities.TblRooms;
@@ -23,7 +22,7 @@ public class RoomsServicesImpl implements RoomsServices{
 	@Override
 	public TblRoomsDto saveRoom(TblRoomsDto rooms) {
 		TblDepartments dep = TblDepartments.builder()
-				.id(rooms.getTblDepartments().getId()).build();
+				.id(rooms.getTblDepartments()).build();
 		
 		TblRooms roomEntity = TblRooms.builder()
 				.id(rooms.getId())
@@ -43,14 +42,10 @@ public class RoomsServicesImpl implements RoomsServices{
 		
 		List<TblRoomsDto> roomsDto = new ArrayList<>();		
 		for(TblRooms u: room) {
-			TblDepartmentsDto dep = TblDepartmentsDto.builder()
-					.id(u.getTblDepartments().getId())
-					.name(u.getTblDepartments().getName()).build();
-			
 			TblRoomsDto rmDto = TblRoomsDto.builder()
 					.id(u.getId())
 					.name(u.getName())
-					.tblDepartments(dep)
+					.tblDepartments(u.getTblDepartments().getId())
 					.status(u.getStatus()).build();
 			
 			roomsDto.add(rmDto);
@@ -61,15 +56,11 @@ public class RoomsServicesImpl implements RoomsServices{
 	@Override
 	public TblRoomsDto getRoomById(Integer id) {
 		TblRooms room = roomRepo.findById(id).get();
-		
-		TblDepartmentsDto dep = TblDepartmentsDto.builder()
-				.id(room.getTblDepartments().getId())
-				.name(room.getTblDepartments().getName()).build();
-		
+
 		return TblRoomsDto.builder()
 				.id(room.getId())
 				.name(room.getName())
-				.tblDepartments(dep)
+				.tblDepartments(room.getTblDepartments().getId())
 				.status(room.getStatus()).build();
 	}
 
@@ -84,7 +75,7 @@ public class RoomsServicesImpl implements RoomsServices{
 		
 		if(room.isPresent()) {			
 			TblDepartments dep = TblDepartments.builder()
-					.id(rooms.getTblDepartments().getId()).build();
+					.id(rooms.getTblDepartments()).build();
 			
 			TblRooms roomEntity = TblRooms.builder()
 					.id(rooms.getId())

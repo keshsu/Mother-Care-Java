@@ -1,7 +1,5 @@
 package com.mothercare.dto;
 
-import java.util.Set;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,5 +15,4 @@ public class TblDesignationsDto {
 	private int id;
     private String name;
     private String status;
-    private Set<TblStaffsDesignationDto> tblStaffsDesignation;
 }

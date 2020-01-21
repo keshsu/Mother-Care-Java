@@ -2,8 +2,6 @@
 
 package com.mothercare.dto;
 
-import java.util.Set;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +15,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TblCheckupAssignsDto {
-
-    private int id;
-    private TblDoctorsDto tblDoctors;
-    private TblPatientsDto tblPatients;
-    private TblTreatmentCategoryDto tblTreatmentCategory;
-    private Set<TblSuggestionsDto> tblSuggestions;
+	private int id;
+    private int tblDoctors;
+    private int tblPatients;
+    private int tblTreatmentCategory;
 }

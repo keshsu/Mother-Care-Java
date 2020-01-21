@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mothercare.dto.TblTreatmentCategoryDto;
@@ -13,11 +14,11 @@ import com.mothercare.services.TreatmentCategoryServices;
 
 @Service
 public class TreatmentCategoryImpl implements TreatmentCategoryServices{
-	
+	@Autowired
 	TreatmentCategoryRepository treatCatRep;
 
 	@Override
-	public List<TblTreatmentCategoryDto> getAlltreatmentCats() {
+	public List<TblTreatmentCategoryDto> getAlltreatmentCategories() {
 		List<TblTreatmentCategory> tblCat = treatCatRep.findAll();
 		
 		List<TblTreatmentCategoryDto> tblCatDtoList = new ArrayList<>();
@@ -26,7 +27,8 @@ public class TreatmentCategoryImpl implements TreatmentCategoryServices{
 			
 			TblTreatmentCategoryDto treatDto = TblTreatmentCategoryDto.builder()
 			.id(t.getId())
-			.name(t.getName()).build();
+			.name(t.getName())
+			.status(t.getStatus()).build();
 			
 			tblCatDtoList.add(treatDto);
 		}
@@ -68,7 +70,6 @@ public class TreatmentCategoryImpl implements TreatmentCategoryServices{
 					.status(treatmentCats.getStatus()).build();
 			
 			treatEntity= treatCatRep.save(treatEntity);
-			treatmentCats.setId(treatmentCats.getId());
 			
 		}
 		return treatmentCats;

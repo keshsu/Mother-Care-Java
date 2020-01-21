@@ -32,8 +32,8 @@ public class TreatmentCategoryController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<TblTreatmentCategoryDto> getPatients(){
-		return treatmentCatSer.getAlltreatmentCats();
+	public List<TblTreatmentCategoryDto> gettreatmentCats(){
+		return treatmentCatSer.getAlltreatmentCategories();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

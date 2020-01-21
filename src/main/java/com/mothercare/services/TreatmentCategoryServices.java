@@ -8,12 +8,11 @@ public interface TreatmentCategoryServices {
 
 	public TblTreatmentCategoryDto savetreatmentCat(TblTreatmentCategoryDto treatmentCats);
 
-	public List<TblTreatmentCategoryDto> getAlltreatmentCats();
-
 	public TblTreatmentCategoryDto gettreatmentCatById(Integer id);
 
 	void deltreatmentCat(Integer id);
 
 	public TblTreatmentCategoryDto updatetreatmentCat(TblTreatmentCategoryDto treatmentCats);
 
+	public List<TblTreatmentCategoryDto> getAlltreatmentCategories();
 }

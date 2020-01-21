@@ -14,8 +14,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TblRoomsDto{
-    private int id;
+	private int id;
     private String name;
     private String status;
-    private TblDepartmentsDto tblDepartments;
+    private int tblDepartments;
 }

@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mothercare.dto.TblCheckupAssignsDto;
-import com.mothercare.dto.TblDoctorsDto;
-import com.mothercare.dto.TblPatientsDto;
-import com.mothercare.dto.TblTreatmentCategoryDto;
 import com.mothercare.entities.TblCheckupAssigns;
 import com.mothercare.entities.TblDoctors;
 import com.mothercare.entities.TblPatients;
@@ -36,26 +33,12 @@ public class CheckupAssignsServicesImpl implements CheckUpAssignsServices{
 		
 		List<TblCheckupAssignsDto> checkupsDtoList = new ArrayList<>();		
 		for(TblCheckupAssigns u: checkups) {
-			TblDoctorsDto docDto = TblDoctorsDto.builder()
-					.id(u.getTblDoctors().getId())
-					.firstname(u.getTblDoctors().getFirstname())
-					.lastname(u.getTblDoctors().getLastname())
-					.build();
-			
-			TblPatientsDto patDto = TblPatientsDto.builder()
-					.id(u.getTblPatients().getId())
-					.firstname(u.getTblPatients().getFirstname())
-					.lastname(u.getTblPatients().getLastname())
-					.build();
-			TblTreatmentCategoryDto terDto = TblTreatmentCategoryDto.builder()
-					.id(u.getTblTreatmentCategory().getId())
-					.name(u.getTblTreatmentCategory().getName()).build();
 			
 			TblCheckupAssignsDto checkupDto = TblCheckupAssignsDto.builder()
 					.id(u.getId())
-					.tblDoctors(docDto)
-					.tblPatients(patDto)
-					.tblTreatmentCategory(terDto).build();
+					.tblDoctors(u.getTblDoctors().getId())
+					.tblPatients(u.getTblPatients().getId())
+					.tblTreatmentCategory(u.getTblTreatmentCategory().getId()).build();
 			
 			checkupsDtoList.add(checkupDto);
 		}
@@ -65,38 +48,24 @@ public class CheckupAssignsServicesImpl implements CheckUpAssignsServices{
 	@Override
 	public TblCheckupAssignsDto getCheckupAssignsById(Integer id) {
 		TblCheckupAssigns checkups = checkupAssignsRep.findById(id).get();
-		TblDoctorsDto docDto = TblDoctorsDto.builder()
-				.id(checkups.getTblDoctors().getId())
-				.firstname(checkups.getTblDoctors().getFirstname())
-				.lastname(checkups.getTblDoctors().getLastname())
-				.build();
-		
-		TblPatientsDto patDto = TblPatientsDto.builder()
-				.id(checkups.getTblPatients().getId())
-				.firstname(checkups.getTblPatients().getFirstname())
-				.lastname(checkups.getTblPatients().getLastname())
-				.build();
-		TblTreatmentCategoryDto terDto = TblTreatmentCategoryDto.builder()
-				.id(checkups.getTblTreatmentCategory().getId())
-				.name(checkups.getTblTreatmentCategory().getName()).build();
 		
 		return TblCheckupAssignsDto.builder()
 				.id(checkups.getId())
-				.tblDoctors(docDto)
-				.tblPatients(patDto)
-				.tblTreatmentCategory(terDto).build();
+				.tblDoctors(checkups.getTblDoctors().getId())
+				.tblPatients(checkups.getTblPatients().getId())
+				.tblTreatmentCategory(checkups.getTblTreatmentCategory().getId()).build();
 	}
 
 	@Override
 	public TblCheckupAssignsDto saveCheckupAssigns(TblCheckupAssignsDto checkupAssigns) {
 		TblDoctors doc = TblDoctors.builder()
-				.id(checkupAssigns.getTblDoctors().getId()).build();
+				.id(checkupAssigns.getTblDoctors()).build();
 		
 		TblPatients pat = TblPatients.builder()
-				.id(checkupAssigns.getTblPatients().getId()).build();
+				.id(checkupAssigns.getTblPatients()).build();
 		
 		TblTreatmentCategory tCat = TblTreatmentCategory.builder()
-				.id(checkupAssigns.getTblTreatmentCategory().getId()).build();
+				.id(checkupAssigns.getTblTreatmentCategory()).build();
 		
 		TblCheckupAssigns checkupEntity = TblCheckupAssigns.builder()
 				.id(checkupAssigns.getId())
@@ -117,13 +86,13 @@ public class CheckupAssignsServicesImpl implements CheckUpAssignsServices{
 		
 		if(ch.isPresent()) {
 			TblDoctors doc = TblDoctors.builder()
-					.id(checkupAssigns.getTblDoctors().getId()).build();
+					.id(checkupAssigns.getTblDoctors()).build();
 			
 			TblPatients pat = TblPatients.builder()
-					.id(checkupAssigns.getTblPatients().getId()).build();
+					.id(checkupAssigns.getTblPatients()).build();
 			
 			TblTreatmentCategory tCat = TblTreatmentCategory.builder()
-					.id(checkupAssigns.getTblTreatmentCategory().getId()).build();
+					.id(checkupAssigns.getTblTreatmentCategory()).build();
 			
 			TblCheckupAssigns checkupEntity = TblCheckupAssigns.builder()
 					.id(checkupAssigns.getId())

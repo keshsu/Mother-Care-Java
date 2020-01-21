@@ -13,8 +13,7 @@ import lombok.Setter;
 @Builder
 public class TblPatientsStatusDto {
 	private int id;
-    private TblPatientsDto tblPatients;
+    private int tblPatients;
     private String featured;
     private String status;
-    
 }

@@ -14,8 +14,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TblSuggestionsDto {
-	
-    private int id;
+	private int id;
     private String comment;
     private TblCheckupAssignsDto tblCheckupAssigns;
     private TblPrescriptionDto tblPrescription;

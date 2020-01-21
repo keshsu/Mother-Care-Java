@@ -7,9 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mothercare.dto.TblDesignationsDto;
 import com.mothercare.dto.TblStaffsDesignationDto;
-import com.mothercare.dto.TblStaffsDto;
 import com.mothercare.entities.TblDesignations;
 import com.mothercare.entities.TblStaffs;
 import com.mothercare.entities.TblStaffsDesignation;
@@ -26,14 +24,11 @@ public class StaffsDesignationsServicesImpl implements StaffsDesignationsService
 	@Override
 	public TblStaffsDesignationDto saveStaff(TblStaffsDesignationDto staffsDesign) {
 		TblStaffs stf = TblStaffs.builder()
-				.id(staffsDesign.getTblStaffs().getId())
-				.firstname(staffsDesign.getTblStaffs().getFirstname())
-				.lastname(staffsDesign.getTblStaffs().getLastname())
+				.id(staffsDesign.getTblStaffs())
 				.build();
 		
 		TblDesignations dsg = TblDesignations.builder()
-				.id(staffsDesign.getTblDesignations().getId())
-				.name(staffsDesign.getTblDesignations().getName())
+				.id(staffsDesign.getTblDesignations())
 				.build();
 		
 		TblStaffsDesignation staffDegEntity= TblStaffsDesignation.builder()
@@ -54,21 +49,11 @@ public class StaffsDesignationsServicesImpl implements StaffsDesignationsService
 		List<TblStaffsDesignationDto> staffsDtoList = new ArrayList<>();
 		
 		for(TblStaffsDesignation s: stafDesg) {
-			TblStaffsDto stfDto = TblStaffsDto.builder()
-					.id(s.getTblStaffs().getId())
-					.firstname(s.getTblStaffs().getFirstname())
-					.lastname(s.getTblStaffs().getLastname())
-					.build();
-			
-			TblDesignationsDto dsgDto = TblDesignationsDto.builder()
-					.id(s.getTblDesignations().getId())
-					.name(s.getTblDesignations().getName())
-					.build();
 			
 			TblStaffsDesignationDto staffDto = TblStaffsDesignationDto.builder()
 					.id(s.getId())
-					.tblStaffs(stfDto)
-					.tblDesignations(dsgDto).build();
+					.tblStaffs(s.getTblStaffs().getId())
+					.tblDesignations(s.getTblDesignations().getId()).build();
 			
 			staffsDtoList.add(staffDto);
 		}
@@ -78,22 +63,11 @@ public class StaffsDesignationsServicesImpl implements StaffsDesignationsService
 	@Override
 	public TblStaffsDesignationDto getstaffById(Integer id) {
 		TblStaffsDesignation deps = stafDRepo.findById(id).get();
-		
-		TblStaffsDto stf = TblStaffsDto.builder()
-				.id(deps.getTblStaffs().getId())
-				.firstname(deps.getTblStaffs().getFirstname())
-				.lastname(deps.getTblStaffs().getLastname())
-				.build();
-		
-		TblDesignationsDto dsg = TblDesignationsDto.builder()
-				.id(deps.getTblDesignations().getId())
-				.name(deps.getTblDesignations().getName())
-				.build();
-		
+
 		return TblStaffsDesignationDto.builder()
 				.id(deps.getId())
-				.tblStaffs(stf)
-				.tblDesignations(dsg).build();
+				.tblStaffs(deps.getTblStaffs().getId())
+				.tblDesignations(deps.getTblDesignations().getId()).build();
 	}
 
 	@Override
@@ -106,14 +80,11 @@ public class StaffsDesignationsServicesImpl implements StaffsDesignationsService
 		Optional<TblStaffsDesignation> staffDe = stafDRepo.findById(staffsdesgn.getId());
 		if(staffDe.isPresent()) {
 			TblStaffs stf = TblStaffs.builder()
-					.id(staffsdesgn.getTblStaffs().getId())
-					.firstname(staffsdesgn.getTblStaffs().getFirstname())
-					.lastname(staffsdesgn.getTblStaffs().getLastname())
+					.id(staffsdesgn.getTblStaffs())
 					.build();
 			
 			TblDesignations dsg = TblDesignations.builder()
-					.id(staffsdesgn.getTblDesignations().getId())
-					.name(staffsdesgn.getTblDesignations().getName())
+					.id(staffsdesgn.getTblDesignations())
 					.build();
 			
 			TblStaffsDesignation staffDegEntity= TblStaffsDesignation.builder()
